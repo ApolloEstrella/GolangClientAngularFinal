@@ -1,0 +1,47 @@
+<mat-card-content>
+    <form [formGroup]="regiForm" (ngSubmit)="onFormSubmit(regiForm.value)">
+        <table>
+            <tr>
+                <td>
+                    <mat-form-field>
+                        <input id="FirstName" name="LastName" formControlName="FirstName" matInput placeholder="First Name">
+                    </mat-form-field>
+                    <mat-error>
+                        <span *ngIf="!regiForm.get('FirstName').valid && regiForm.get('FirstName').touched">Please enter
+                            First Name !!!</span>
+                    </mat-error>
+                </td>
+                <td>
+                    <mat-form-field class="demo-full-width">
+                        <input formControlName="LastName" matInput placeholder="Last Name">
+                    </mat-form-field>
+                    <mat-error>
+                        <span *ngIf="!regiForm.get('LastName').valid && regiForm.get('LastName').touched">Please enter
+                            Last Name !!!</span>
+                    </mat-error>
+                </td>
+                <td>
+                    <button type="submit" [disabled]="!regiForm.valid" mat-raised-button color="primary">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <table border="0">
+        <tr *ngFor="let person of people">
+            <td>
+               {{person._id}}
+            </td>
+            <td>
+                {{person.firstname}}
+            </td>
+            <td>
+                {{person.lastname}}
+            </td>
+            <td>
+                <button mat-raised-button color="primary">Edit</button>
+            </td>
+            <td>
+                <button mat-raised-button color="warn" value={{person._id}} (click)="x=person._id; onDeletePerson(x)"> Delete </button>
+            </td>
+        </tr>
+    </table> 
