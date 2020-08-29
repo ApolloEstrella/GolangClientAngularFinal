@@ -3,8 +3,9 @@
         <table>
             <tr>
                 <td>
+                    <input type="hidden" value="person._id" id="personId" name="personId" />
                     <mat-form-field>
-                        <input id="FirstName" name="LastName" formControlName="FirstName" matInput placeholder="First Name">
+                        <input id="FirstName" name="FirstName" formControlName="FirstName" matInput placeholder="First Name">
                     </mat-form-field>
                     <mat-error>
                         <span *ngIf="!regiForm.get('FirstName').valid && regiForm.get('FirstName').touched">Please enter
@@ -13,7 +14,7 @@
                 </td>
                 <td>
                     <mat-form-field class="demo-full-width">
-                        <input formControlName="LastName" matInput placeholder="Last Name">
+                        <input id="LastName" name="LastName" formControlName="LastName" matInput placeholder="Last Name">
                     </mat-form-field>
                     <mat-error>
                         <span *ngIf="!regiForm.get('LastName').valid && regiForm.get('LastName').touched">Please enter
@@ -21,7 +22,7 @@
                     </mat-error>
                 </td>
                 <td>
-                    <button type="submit" [disabled]="!regiForm.valid" mat-raised-button color="primary">Submit</button>
+                    <button id="submitBtn" type="submit" [disabled]="!regiForm.valid" mat-raised-button color="primary">Submit</button>
                 </td>
             </tr>
         </table>
@@ -38,10 +39,10 @@
                 {{person.lastname}}
             </td>
             <td>
-                <button mat-raised-button color="primary">Edit</button>
+                <button mat-raised-button color="primary" (click)="onUpdatePerson(person._id)">Edit</button>
             </td>
             <td>
-                <button mat-raised-button color="warn" value={{person._id}} (click)="x=person._id; onDeletePerson(x)"> Delete </button>
+                <button mat-raised-button color="warn" (click)="onDeletePerson(person._id)"> Delete </button>
             </td>
         </tr>
     </table> 

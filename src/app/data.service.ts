@@ -17,6 +17,8 @@ export class DataService {
 
   private REST_API_DELETE = "http://localhost:12345/api/delete";
 
+  private REST_API_UPDATE = "http://localhost:12345/api/update";
+
   constructor(private httpClient: HttpClient) { }
 
   handleError(error: HttpErrorResponse) {
@@ -42,29 +44,18 @@ export class DataService {
   }
 
   public sendDeleteRequest(id) {
-    /* const httpOptions = {
-        headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Methods": "DELETE",
-        
-        "Access-Control-Request-Method": "DELETE",
-        "Access-Control-Request-Headers": "X-PINGOTHER, Content-Type",
-
-
-        "Access-Control-Allow-Headers": "content-type,access-control-allow-origin, access-control-allow-headers, access-control-allow-credentials, access-control-allow-methods"
-        
-      })   response.Header().Set(, "X-PINGOTHER, Content-Type")
-    }; */
-    const httpOptions = {headers: new HttpHeaders()}
+    const httpOptions = { headers: new HttpHeaders() }
     httpOptions.headers = httpOptions.headers.set("Access-Control-Allow-Origin", "*")
     httpOptions.headers = httpOptions.headers.set("Access-Control-Allow-Methods", "DELETE")
-    //httpOptions.headers = httpOptions.headers.set("Content-Type", "application/json")
-    //httpOptions.headers = httpOptions.headers.set("Access-Control-Request-Method", "DELETE")
-    //httpOptions.headers = httpOptions.headers.set("Access-Control-Request-Headers", "X-PINGOTHER, Content-Type")
-    //httpOptions.headers = httpOptions.headers.set("Access-Control-Allow-Headers", "x-pingother, content-type,access-control-allow-origin, access-control-allow-headers, access-control-allow-credentials, access-control-allow-methods")
     const url = `${this.REST_API_DELETE}/${id}`;
     return this.httpClient.delete(url, httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public sendUpdateRequest(body, id) {
+    const httpOptions = { headers: new HttpHeaders() }
+    httpOptions.headers = httpOptions.headers.set("Access-Control-Allow-Origin", "*")
+    httpOptions.headers = httpOptions.headers.set("Access-Control-Allow-Methods", "DELETE")
+    const url = `${this.REST_API_UPDATE}/${id}`;
+    return this.httpClient.put(url, body).pipe(catchError(this.handleError));
   }
 }
